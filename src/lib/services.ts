@@ -1,27 +1,27 @@
 import api from './api';
-import { Slot, Booking, User } from './types';
+import { Slot, Booking, User, AdminStats } from './types';
 
 // Slot services
-export const getAvailableSlots = async (filters?: { 
-  size?: string; 
+export const getAvailableSlots = async (filters?: {
+  size?: string;
   vehicleType?: string;
 }): Promise<Slot[]> => {
   try {
     let url = '/customer/slots';
-    
+
     if (filters) {
       const params = new URLSearchParams();
       if (filters.size && filters.size !== 'ANY') params.append('size', filters.size);
       if (filters.vehicleType && filters.vehicleType !== 'ANY') params.append('vehicleType', filters.vehicleType);
-      
+
       if (params.toString()) {
         url += `?${params.toString()}`;
       }
     }
-    
+
     const response = await api.get(url);
     console.log('Available slots:', response.data);
-    
+
     return response.data || [];
   } catch (error) {
     console.error('Error fetching slots:', error);
@@ -56,8 +56,8 @@ export const deleteSlot = async (id: string): Promise<void> => {
 
 // Booking services
 export const createBooking = async (
-  slotId: string, 
-  startTime: string, 
+  slotId: string,
+  startTime: string,
   endTime: string
 ): Promise<Booking> => {
   const response = await api.post('/customer/bookings', {
@@ -77,8 +77,8 @@ export const getBookingDetails = async (id: string): Promise<Booking> => {
   const response = await api.get(`/customer/bookings/${id}`);
   // console.log('Booking details:', response.data);
   // console.log('Booking :', response);
-  
-  
+
+
   return response.data;
 };
 
@@ -126,3 +126,10 @@ export const updateBookingStatus = async (id: string, status: string): Promise<B
 export const deleteBooking = async (id: string): Promise<void> => {
   await api.delete(`/bookings/${id}`);
 };
+
+export const getAdminStats = async (): Promise<AdminStats> => {
+  const response = await api.get("/stats");
+  return response.data.data as AdminStats;
+};
+
+

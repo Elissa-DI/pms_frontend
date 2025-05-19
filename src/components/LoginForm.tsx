@@ -1,12 +1,11 @@
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner";
 
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { toast } from 'sonner';
-
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,14 +13,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { login } from '@/lib/auth';
-import { useAuth } from '@/context/AuthContext';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { login } from "@/lib/auth";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -34,8 +33,8 @@ const LoginForm = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -44,10 +43,10 @@ const LoginForm = () => {
     try {
       const user = await login(data.email, data.password);
       setUser(user);
-      toast.success('Welcome back!');
-      navigate('/slots');
+      toast.success("Welcome back!");
+      navigate("/slots");
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error("Login failed:", error);
     } finally {
       setIsLoading(false);
     }
@@ -71,10 +70,10 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input 
-                    type="email" 
-                    placeholder="you@example.com" 
-                    {...field} 
+                  <Input
+                    type="email"
+                    placeholder="you@example.com"
+                    {...field}
                     disabled={isLoading}
                   />
                 </FormControl>
@@ -90,25 +89,35 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input 
-                    type="password" 
-                    placeholder="Your password" 
+                  <Input
+                    type="password"
+                    placeholder="Your password"
                     {...field}
-                    disabled={isLoading} 
+                    disabled={isLoading}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          <div className="text-end text-sm">
+            <p>
+              <Link
+                to="/forgot-password"
+                className="text-primary hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </p>
+          </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Signing in...' : 'Sign in'}
+            {isLoading ? "Signing in..." : "Sign in"}
           </Button>
 
           <div className="text-center text-sm">
             <p>
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <Link to="/register" className="text-primary hover:underline">
                 Sign up
               </Link>

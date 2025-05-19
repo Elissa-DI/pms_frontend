@@ -10,11 +10,11 @@ export const login = async (email: string, password: string) => {
 };
 
 export const register = async (name: string, email: string, password: string) => {
-  const response = await api.post('/auth/register', { 
-    name, 
-    email, 
+  const response = await api.post('/auth/register', {
+    name,
+    email,
     password,
-    role: 'CUSTOMER' 
+    role: 'CUSTOMER'
   });
   return response.data;
 };
@@ -27,6 +27,22 @@ export const verifyEmail = async (email: string, otp: string) => {
 export const getCurrentUser = async (): Promise<User> => {
   const response = await api.get('/users/me');
   return response.data.user;
+};
+
+export const forgotPassword = async (email: string): Promise<{ message: string }> => {
+  const response = await api.post('/auth/forgot-password', { email });
+  return response.data;
+};
+
+export const resetPassword = async (
+  otp: string,
+  password: string
+): Promise<{ message: string }> => {
+  const response = await api.post('/auth/reset-password', {
+    token : otp,
+    newPassword : password,
+  });
+  return response.data;
 };
 
 export const logout = () => {

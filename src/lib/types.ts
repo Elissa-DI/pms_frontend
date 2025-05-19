@@ -35,3 +35,14 @@ export type Booking = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type AdminStats = {
+  totalUsers: number;
+  verifiedUsers: number;
+  totalBookings: number;
+  pendingBookings: number;
+  confirmedBookings: number;
+  availableSlots: number;
+  occupiedSlots: number;
+  unavailableSlots: number;
+}
