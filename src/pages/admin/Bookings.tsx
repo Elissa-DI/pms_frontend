@@ -258,7 +258,7 @@ const AdminBookings = () => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteBooking} disabled={isDeleting} className='bg-red-500'>
+            <AlertDialogAction onClick={handleDeleteBooking} disabled={isDeleting} className='bg-red-500 hover:bg-red-600'>
               {isDeleting ? 'Deleting...' : 'Delete'}
             </AlertDialogAction>
           </AlertDialogFooter>
