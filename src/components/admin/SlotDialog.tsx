@@ -304,7 +304,7 @@ const SlotDialog = ({ open, onOpenChange, slot, onClose }: SlotDialogProps) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} disabled={isSubmitting}>
+            <AlertDialogAction onClick={handleDelete} disabled={isSubmitting} className="bg-red-500 hover:bg-red-600">
               {isSubmitting ? "Deleting..." : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
