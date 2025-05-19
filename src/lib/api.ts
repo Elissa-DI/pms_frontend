@@ -43,6 +43,7 @@ api.interceptors.response.use(
     // If 401 Unauthorized, clear token and redirect to login
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
+      toast.warning("Please login!");
       window.location.href = '/login';
     }
     

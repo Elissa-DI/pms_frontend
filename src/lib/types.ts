@@ -11,7 +11,7 @@ export type User = {
 
 export type SlotSize = 'SMALL' | 'MEDIUM' | 'LARGE';
 export type VehicleType = 'MOTORCYCLE' | 'CAR' | 'TRUCK' | 'ANY';
-export type SlotStatus = 'AVAILABLE' | 'OCCUPIED' | 'MAINTENANCE';
+export type SlotStatus = 'AVAILABLE' | 'OCCUPIED' | 'UNAVAILABLE';
 
 export type Slot = {
   id: string;

@@ -67,13 +67,33 @@ const SlotDialog = ({ open, onOpenChange, slot, onClose }: SlotDialogProps) => {
   const form = useForm<SlotFormValues>({
     resolver: zodResolver(slotFormSchema),
     defaultValues: {
-      number: slot?.number || '',
-      size: slot?.size || '',
-      vehicleType: slot?.vehicleType || '',
-      location: slot?.location || '',
-      status: slot?.status || 'AVAILABLE',
+      number: "",
+      size: "",
+      vehicleType: "",
+      location: "",
+      status: "AVAILABLE",
     },
   });
+
+  useEffect(() => {
+    if (slot) {
+      form.reset({
+        number: slot.number,
+        size: slot.size,
+        vehicleType: slot.vehicleType,
+        location: slot.location,
+        status: slot.status,
+      });
+    } else {
+      form.reset({
+        number: "",
+        size: "",
+        vehicleType: "",
+        location: "",
+        status: "AVAILABLE",
+      });
+    }
+  }, [slot, form]);
 
   const handleSubmit = async (data: SlotFormValues) => {
     try {
@@ -231,7 +251,7 @@ const SlotDialog = ({ open, onOpenChange, slot, onClose }: SlotDialogProps) => {
                       <SelectContent>
                         <SelectItem value="AVAILABLE">Available</SelectItem>
                         <SelectItem value="OCCUPIED">Occupied</SelectItem>
-                        <SelectItem value="MAINTENANCE">Maintenance</SelectItem>
+                        <SelectItem value="UNAVAILABLE">Unavailable</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -242,13 +262,13 @@ const SlotDialog = ({ open, onOpenChange, slot, onClose }: SlotDialogProps) => {
               <DialogFooter className="flex justify-between sm:justify-between gap-2">
                 <div className="flex gap-2">
                   {isEditing && (
-                      <Button
-                        type="button"
-                        variant="destructive"
-                        onClick={() => setIsDeleteAlertOpen(true)}
-                      >
-                        Delete
-                      </Button>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={() => setIsDeleteAlertOpen(true)}
+                    >
+                      Delete
+                    </Button>
                   )}
                 </div>
                 <div className="flex gap-2">

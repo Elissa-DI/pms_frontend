@@ -175,7 +175,7 @@ const RegisterForm = () => {
                 <FormControl>
                   <Input 
                     type="password" 
-                    placeholder="••••••••" 
+                    placeholder="Your password" 
                     {...field}
                     disabled={isLoading} 
                   />
@@ -194,7 +194,7 @@ const RegisterForm = () => {
                 <FormControl>
                   <Input 
                     type="password" 
-                    placeholder="••••••••" 
+                    placeholder="Confirm password" 
                     {...field}
                     disabled={isLoading} 
                   />
