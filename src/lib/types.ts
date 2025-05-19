@@ -46,3 +46,15 @@ export type AdminStats = {
   occupiedSlots: number;
   unavailableSlots: number;
 }
+
+export type Ticket = {
+  bookingId: string;
+  slotNumber: string;
+  vehicleType: string;
+  location: string;
+  startTime: string;
+  endTime: string;
+  durationHours: number;
+  ratePerHour: number;
+  total: number;
+}

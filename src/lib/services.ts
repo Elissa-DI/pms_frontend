@@ -1,5 +1,5 @@
 import api from './api';
-import { Slot, Booking, User, AdminStats } from './types';
+import { Slot, Booking, User, AdminStats, Ticket } from './types';
 
 // Slot services
 export const getAvailableSlots = async (filters?: {
@@ -130,6 +130,11 @@ export const deleteBooking = async (id: string): Promise<void> => {
 export const getAdminStats = async (): Promise<AdminStats> => {
   const response = await api.get("/stats");
   return response.data.data as AdminStats;
+};
+
+export const getBookingTicket = async (bookingId: string): Promise<Ticket> => {
+  const response = await api.get(`/customer/bookings/${bookingId}/ticket`);
+  return response.data;
 };
 
 
